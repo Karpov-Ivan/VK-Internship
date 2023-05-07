@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectModels", "ProjectMod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project", "Project\Project.csproj", "{991B1458-5046-4940-B66B-EAA9D75B6663}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VKInternshipTest", "VKInternshipTest\VKInternshipTest.csproj", "{990AAFA9-A5CC-422D-B127-13004E9FEF39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{991B1458-5046-4940-B66B-EAA9D75B6663}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{991B1458-5046-4940-B66B-EAA9D75B6663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{991B1458-5046-4940-B66B-EAA9D75B6663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990AAFA9-A5CC-422D-B127-13004E9FEF39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990AAFA9-A5CC-422D-B127-13004E9FEF39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990AAFA9-A5CC-422D-B127-13004E9FEF39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990AAFA9-A5CC-422D-B127-13004E9FEF39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
