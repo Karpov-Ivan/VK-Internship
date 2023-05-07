@@ -37,6 +37,7 @@ namespace VKInternship
             services.AddTransient<IUserGroupRepository, PostgresSQLUserGroupRepository>();
             services.AddTransient<IUserStateRepository, PostgresSQLUserStateRepository>();
             services.AddTransient<UserGroupHandler>();
+            services.AddTransient<UserStateHandler>();
 
             services.AddAuthentication(opt => {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

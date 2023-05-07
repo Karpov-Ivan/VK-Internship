@@ -7,7 +7,7 @@ namespace DBCore
 {
 	public interface IUserGroupRepository
 	{
-        public Task AddUserGroup(User_Group user);
+        public Task AddUserGroup(User_Group userGroup);
 
         public Task DeleteUserGroupByModel(User_Group userGroup);
 

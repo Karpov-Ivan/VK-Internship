@@ -46,6 +46,43 @@ namespace DBCore.Converters
             };
         }
         //
+        public UserStateModel GetUserStateModelFromUserStateDto(UserStateDto userStateDto)
+        {
+            if (userStateDto == null)
+                return new UserStateModel();
+
+            return new UserStateModel()
+            {
+                Code = userStateDto.Code,
+                Description = userStateDto.Description
+            };
+        }
+
+        public User_State GetUserStateFromUserStateModel(UserStateModel userStateModel)
+        {
+            if (userStateModel == null)
+                return new User_State();
+
+            return new User_State()
+            {
+                Code = userStateModel.Code,
+                Description = userStateModel.Description
+            };
+        }
+
+        public UserStateGetDto GetUserStateDtoFromUserState(User_State userState)
+        {
+            if (userState == null)
+                return new UserStateGetDto();
+
+            return new UserStateGetDto()
+            {
+                Id = userState.Id,
+                Code = userState.Code,
+                Description = userState.Description
+            };
+        }
+        //
         public UserModel GetUserModelFromUserDto(UserDto userDto)
         {
             if (userDto == null)

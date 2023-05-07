@@ -20,7 +20,7 @@ namespace DBCore
                 if (_context.User_Group.Select(x => x.Code).ToList().Contains(userGroup.Code))
                     throw new DuplicateWaitObjectException();
 
-                await _context.AddAsync(userGroup);
+                await _context.User_Group.AddAsync(userGroup);
                 await _context.SaveChangesAsync();
             }
             catch (DuplicateWaitObjectException exception)
@@ -46,10 +46,11 @@ namespace DBCore
 
                 if (!_context.User_Group.Select(x => x.Code).ToList().Contains(userGroup.Code))
                     throw new ArgumentNullException();
+
                 var userGroupDb = _context.User_Group.First(x => x.Code == userGroup.Code &&
                                                                  x.Description == userGroup.Description);
 
-                _context.Remove(userGroupDb);
+                _context.User_Group.Remove(userGroupDb);
                 await _context.SaveChangesAsync();
             }
             catch (ArgumentNullException exception)
@@ -68,7 +69,7 @@ namespace DBCore
             {
                 var user_group = _context.User_Group.First(x => x.Code == enumGroup);
 
-                _context.Remove(user_group);
+                _context.User_Group.Remove(user_group);
                 await _context.SaveChangesAsync();
             }
             catch (ArgumentNullException exception)
@@ -87,7 +88,7 @@ namespace DBCore
             {
                 var user_group = _context.User_Group.First(x => x.Id == userGroupId);
 
-                _context.Remove(user_group);
+                _context.User_Group.Remove(user_group);
                 await _context.SaveChangesAsync();
             }
             catch (ArgumentNullException exception)
@@ -111,7 +112,7 @@ namespace DBCore
 
                 userGroupDb.Description = userGroup.Description;
 
-                _context.Update(userGroupDb);
+                _context.User_Group.Update(userGroupDb);
                 await _context.SaveChangesAsync();
             }
             catch (ArgumentNullException exception)

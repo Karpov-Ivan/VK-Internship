@@ -1,8 +1,5 @@
 ﻿using System;
-using Azure;
 using DBCore;
-using DBCore.Converters;
-using DBModels;
 using DTOModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,28 +10,28 @@ namespace VKInternship.Controllers
 {
     [ApiController]
     [Route(template: "api/[controller]")]
-    public class UserGroupController : Controller
+    public class UserStateController : Controller
     {
-        private readonly IUserGroupRepository _userGroupRepository;
+        private readonly IUserStateRepository _userStateRepository;
 
-        private readonly UserGroupHandler _userGroupHandler;
+        private readonly UserStateHandler _userStateHandler;
 
-        public UserGroupController(IUserGroupRepository userGroupRepository,
-                                   UserGroupHandler userStateHandler)
-		{
-            _userGroupRepository = userGroupRepository;
-            _userGroupHandler = userStateHandler;
-		}
+        public UserStateController(IUserStateRepository userStateRepository,
+                                   UserStateHandler userStateHandler)
+        {
+            _userStateRepository = userStateRepository;
+            _userStateHandler = userStateHandler;
+        }
 
         [Authorize]
         [HttpPost("Adding")]
-        public async Task<IActionResult> AddUserGroup(UserGroupDto userGroupDto)
+        public async Task<IActionResult> AddUserState(UserStateDto userStateDto)
         {
             IActionResult response;
 
             try
             {
-                await _userGroupHandler.AddUserGroupInDB(userGroupDto, _userGroupRepository);
+                await _userStateHandler.AddUserStateInDB(userStateDto, _userStateRepository);
 
                 response = Ok();
             }
@@ -56,13 +53,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpDelete("DeletingByModel")]
-        public async Task<IActionResult> DeleteUserGroupByModel(UserGroupDto userGroupDto)
+        public async Task<IActionResult> DeleteUserStateByModel(UserStateDto userStateDto)
         {
             IActionResult response;
 
             try
             {
-                await _userGroupHandler.DeleteUserGroupByModel(userGroupDto, _userGroupRepository);
+                await _userStateHandler.DeleteUserStateByModel(userStateDto, _userStateRepository);
 
                 response = Ok();
             }
@@ -80,13 +77,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpDelete("DeletingByCode")]
-        public async Task<IActionResult> DeleteUserGroupByCode(EnumGroup enumGroup)
+        public async Task<IActionResult> DeleteUserStateByCode(EnumState enumState)
         {
             IActionResult response;
 
             try
             {
-                await _userGroupHandler.DeleteUserGroupByCode(enumGroup, _userGroupRepository);
+                await _userStateHandler.DeleteUserStateByCode(enumState, _userStateRepository);
 
                 response = Ok();
             }
@@ -104,13 +101,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpDelete("DeletingById")]
-        public async Task<IActionResult> DeleteUserGroupById(long userGroupId)
+        public async Task<IActionResult> DeleteUserStateById(long userStateId)
         {
             IActionResult response;
 
             try
             {
-                await _userGroupHandler.DeleteUserGroupById(userGroupId, _userGroupRepository);
+                await _userStateHandler.DeleteUserStateById(userStateId, _userStateRepository);
 
                 response = Ok();
             }
@@ -128,13 +125,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpPatch("Changing")]
-        public async Task<IActionResult> ChangeUserGroup(UserGroupDto userGroupDto)
+        public async Task<IActionResult> ChangeUserState(UserStateDto userStateDto)
         {
             IActionResult response;
 
             try
             {
-                await _userGroupHandler.ChangeUserGroup(userGroupDto, _userGroupRepository);
+                await _userStateHandler.ChangeUserState(userStateDto, _userStateRepository);
 
                 response = Ok();
             }
@@ -151,15 +148,15 @@ namespace VKInternship.Controllers
         }
 
         [HttpGet("Getting")]
-        public async Task<IActionResult> GetAllUserGroup()
+        public async Task<IActionResult> GetAllUserState()
         {
             IActionResult response;
 
             try
             {
-                var all_user_group = await _userGroupHandler.GetAllUserGroup(_userGroupRepository);
+                var all_user_state = await _userStateHandler.GetAllUserState(_userStateRepository);
 
-                response = Ok(all_user_group);
+                response = Ok(all_user_state);
             }
             catch (ArgumentNullException exception)
             {
