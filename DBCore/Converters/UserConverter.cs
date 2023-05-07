@@ -83,29 +83,12 @@ namespace DBCore.Converters
             };
         }
         //
-        public UserModel GetUserModelFromUserDto(UserDto userDto)
-        {
-            if (userDto == null)
-                return new UserModel();
-
-            return new UserModel()
-            {
-                Id = userDto.Id,
-                Login = userDto.Login,
-                Password = userDto.Password,
-                Code_Group = userDto.Code_Group,
-                Description_Group = userDto.Description_Group,
-                Code_State = userDto.Code_State,
-                Description_State = userDto.Description_State
-            };
-        }
-
-        public UserModel GetUserModelFromUser(User user, User_Group user_group, User_State user_state)
+        public UserGetModel GetUserGetModelFromUser(User user, User_Group user_group, User_State user_state)
         {
             if (user == null || user_group == null || user_state == null)
-                return new UserModel();
+                return new UserGetModel();
 
-            return new UserModel()
+            return new UserGetModel()
             {
                 Id = user.Id,
                 Login = user.Login,
@@ -118,6 +101,37 @@ namespace DBCore.Converters
             };
         }
 
+        public UserGetDto GetUserGetDtoFromUserGetModel(UserGetModel userGetModel)
+        {
+            if (userGetModel == null)
+                return new UserGetDto();
+
+            return new UserGetDto()
+            {
+                Id = userGetModel.Id,
+                Login = userGetModel.Login,
+                Password = userGetModel.Password,
+                Created_Date = userGetModel.Created_Date,
+                Code_Group = userGetModel.Code_Group,
+                Description_Group = userGetModel.Description_Group,
+                Code_State = userGetModel.Code_State,
+                Description_State = userGetModel.Description_State
+            };
+        }
+
+        public UserModel GetUserModelFromUserDto(UserDto userDto)
+        {
+            if (userDto == null)
+                return new UserModel();
+
+            return new UserModel()
+            {
+                Login = userDto.Login,
+                Password = userDto.Password,
+                User_Group_Id = userDto.User_Group_Id
+            };
+        }
+
         public User GetUserFromUserModel(UserModel userModel)
         {
             if (userModel == null)
@@ -125,27 +139,9 @@ namespace DBCore.Converters
 
             return new User()
             {
-                Id = userModel.Id,
                 Login = userModel.Login,
                 Password = userModel.Password,
-                Created_Date = userModel.Created_Date
-            };
-        }
-
-        public UserDto GetUserDtoFromUserModel(UserModel userModel)
-        {
-            if (userModel == null)
-                return new UserDto();
-
-            return new UserDto()
-            {
-                Id = userModel.Id,
-                Login = userModel.Login,
-                Password = userModel.Password,
-                Code_Group = userModel.Code_Group,
-                Description_Group = userModel.Description_Group,
-                Code_State = userModel.Code_State,
-                Description_State = userModel.Description_State
+                User_Group_Id = userModel.User_Group_Id
             };
         }
     }

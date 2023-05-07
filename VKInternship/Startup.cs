@@ -36,6 +36,7 @@ namespace VKInternship
             services.AddTransient<IUserRepository, PostgresSQLUserRepository>();
             services.AddTransient<IUserGroupRepository, PostgresSQLUserGroupRepository>();
             services.AddTransient<IUserStateRepository, PostgresSQLUserStateRepository>();
+            services.AddTransient<UserHandler>();
             services.AddTransient<UserGroupHandler>();
             services.AddTransient<UserStateHandler>();
 
