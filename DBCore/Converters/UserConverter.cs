@@ -9,20 +9,6 @@ namespace DBCore.Converters
 	{
 		public UserConverter() { }
 
-        public User GetUserFromUserModel(UserModel userModel)
-        {
-            if (userModel == null)
-                return new User();
-
-            return new User()
-            {
-                Id = userModel.Id,
-                Login = userModel.Login,
-                Password = userModel.Password,
-                Created_Date = userModel.Created_Date
-            };
-        }
-
         public UserGroupModel GetUserGroupModelFromUserGroupDto(UserGroupDto userGroupDto)
         {
             if (userGroupDto == null)
@@ -47,6 +33,36 @@ namespace DBCore.Converters
             };
         }
 
+        public UserGroupGetDto GetUserGroupDtoFromUserGroup(User_Group userGroup)
+        {
+            if (userGroup == null)
+                return new UserGroupGetDto();
+
+            return new UserGroupGetDto()
+            {
+                Id = userGroup.Id,
+                Code = userGroup.Code,
+                Description = userGroup.Description
+            };
+        }
+        //
+        public UserModel GetUserModelFromUserDto(UserDto userDto)
+        {
+            if (userDto == null)
+                return new UserModel();
+
+            return new UserModel()
+            {
+                Id = userDto.Id,
+                Login = userDto.Login,
+                Password = userDto.Password,
+                Code_Group = userDto.Code_Group,
+                Description_Group = userDto.Description_Group,
+                Code_State = userDto.Code_State,
+                Description_State = userDto.Description_State
+            };
+        }
+
         public UserModel GetUserModelFromUser(User user, User_Group user_group, User_State user_state)
         {
             if (user == null || user_group == null || user_state == null)
@@ -65,24 +81,21 @@ namespace DBCore.Converters
             };
         }
 
-        public UserModel GetUserModelFromUserDto(UserDto userDto)
+        public User GetUserFromUserModel(UserModel userModel)
         {
-            if (userDto == null)
-                return new UserModel();
+            if (userModel == null)
+                return new User();
 
-            return new UserModel()
+            return new User()
             {
-                Id = userDto.Id,
-                Login = userDto.Login,
-                Password = userDto.Password,
-                Code_Group = userDto.Code_Group,
-                Description_Group = userDto.Description_Group,
-                Code_State = userDto.Code_State,
-                Description_State = userDto.Description_State
+                Id = userModel.Id,
+                Login = userModel.Login,
+                Password = userModel.Password,
+                Created_Date = userModel.Created_Date
             };
         }
 
-        public UserDto GetUserDto(UserModel userModel)
+        public UserDto GetUserDtoFromUserModel(UserModel userModel)
         {
             if (userModel == null)
                 return new UserDto();
