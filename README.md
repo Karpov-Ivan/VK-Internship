@@ -6,10 +6,7 @@
 <li>Методы API должны быть асинхронными.</li>
 <li>В качестве СУБД необходимо использовать PostgreSQL.</li>
 <li>В качестве ORM необходимо использовать EntityFrameworkCore.</li>
-<li>В качестве моделей данных должны использоваться следующие сущности:</li>
-  <li>user (id, login, password, created_date, user_group_id, user_state_id)</li>
-  <li>user_group (id, code, description) Возможные значения для code (Admin, User)</li>
-  <li>user_state (id, code, description) Возможные значения для code (Active, Blocked)</li>
+<li>В качестве моделей данных должны использоваться следующие сущности: user (id, login, password, created_date, user_group_id, user_state_id); user_group (id, code, description) Возможные значения для code (Admin, User); user_state (id, code, description) Возможные значения для code (Active, Blocked).</li>
 <br>
 <br>
 <li>Приложение должно позволять добавлять/удалять/получать пользователей. Получить можно как одного, так и всех пользователей (добавление/удаление только по одному). При получении пользователей должна возвращаться полная информация о них (с user_group и user_state).</li>
