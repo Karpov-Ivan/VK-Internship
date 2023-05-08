@@ -1,4 +1,5 @@
 ﻿using System;
+using Azure;
 using DBCore;
 using DBCore.Converters;
 using DTOModels;
@@ -15,13 +16,9 @@ namespace VKInternship.Controllers
     {
         private readonly IUserRepository _userRepository;
 
-        private readonly UserHandler _userHandler;
-
-        public UserController(IUserRepository userRepository,
-                              UserHandler userHandler)
+        public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _userHandler = userHandler;
         }
 
         [Authorize]
@@ -32,7 +29,7 @@ namespace VKInternship.Controllers
 
             try
             {
-                await _userHandler.AddUserInDBAsync(userDto, _userRepository);
+                await new UserHandler().AddUserInDBAsync(userDto, _userRepository);
 
                 response = Ok();
             }
@@ -60,7 +57,7 @@ namespace VKInternship.Controllers
 
             try
             {
-                await _userHandler.DeleteUserByModelAsync(userDto, _userRepository);
+                await new UserHandler().DeleteUserByModelAsync(userDto, _userRepository);
 
                 response = Ok();
             }
@@ -77,14 +74,14 @@ namespace VKInternship.Controllers
         }
 
         [Authorize]
-        [HttpDelete("DeletingById")]
+        [HttpDelete("DeletingById{userId}")]
         public async Task<IActionResult> DeleteUserByIdAsync(long userId)
         {
             IActionResult response;
 
             try
             {
-                await _userHandler.DeleteUserByIdAsync(userId, _userRepository);
+                await new UserHandler().DeleteUserByIdAsync(userId, _userRepository);
 
                 response = Ok();
             }
@@ -107,7 +104,7 @@ namespace VKInternship.Controllers
 
             try
             {
-                var all_user = await _userHandler.GetAllUserAsync(_userRepository);
+                var all_user = await new UserHandler().GetAllUserAsync(_userRepository);
 
                 response = Ok(all_user);
             }
@@ -123,16 +120,39 @@ namespace VKInternship.Controllers
             return response;
         }
 
-        [HttpGet("GettingMultiple")]
-        public async Task<IActionResult> GetMultipleUserAsync(int count)
+        [HttpGet("GettingMultiple{skip}/{count}")]
+        public async Task<IActionResult> GetMultipleUserAsync(int skip, int count)
         {
             IActionResult response;
 
             try
             {
-                var all_user = await _userHandler.GetMultipleUserAsync(count, _userRepository);
+                var all_user = await new UserHandler().GetMultipleUserAsync(skip, count, _userRepository);
 
                 response = Ok(all_user);
+            }
+            catch (ArgumentNullException exception)
+            {
+                response = StatusCode(StatusCodes.Status400BadRequest);
+            }
+            catch (Exception exception)
+            {
+                response = StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return response;
+        }
+
+        [HttpGet("GettingMultiple{userId}")]
+        public async Task<IActionResult> GetUserByIdAsync(int userId)
+        {
+            IActionResult response;
+
+            try
+            {
+                var user = await new UserHandler().GetUserByIdAsync(userId, _userRepository);
+
+                response = Ok(user);
             }
             catch (ArgumentNullException exception)
             {

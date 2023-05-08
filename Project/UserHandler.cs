@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.Metrics;
 using DBCore;
 using DBCore.Converters;
 using DBModels;
 using DTOModels;
+using Microsoft.EntityFrameworkCore;
 using ProjectModels;
 
 namespace Project
@@ -104,13 +106,38 @@ namespace Project
             }
         }
 
-        public async Task<List<UserGetDto>> GetMultipleUserAsync(int count, IUserRepository postgresSQLUserRepository)
+        public async Task<List<UserGetDto>> GetMultipleUserAsync(int skip, int count,
+                                                                 IUserRepository postgresSQLUserRepository)
         {
             try
             {
-                var allUserGetModel = await postgresSQLUserRepository.GetMultipleUserAsync(count);
+                if (skip < 0 || count < 0)
+                    throw new ArgumentNullException();
+
+                var allUserGetModel = await postgresSQLUserRepository.GetMultipleUserAsync(skip, count);
 
                 return allUserGetModel.Select(x => new UserConverter().GetUserGetDtoFromUserGetModel(x)).ToList();
+            }
+            catch (ArgumentNullException exception)
+            {
+                throw new ArgumentNullException(exception.Message);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        public async Task<UserGetDto> GetUserByIdAsync(int userId, IUserRepository postgresSQLUserRepository)
+        {
+            try
+            {
+                if (userId < 0)
+                    throw new ArgumentNullException();
+
+                var userGetModel = await postgresSQLUserRepository.GetUserByIdAsync(userId);
+
+                return new UserConverter().GetUserGetDtoFromUserGetModel(userGetModel);
             }
             catch (ArgumentNullException exception)
             {

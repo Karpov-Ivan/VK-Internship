@@ -17,13 +17,9 @@ namespace VKInternship.Controllers
     {
         private readonly IUserGroupRepository _userGroupRepository;
 
-        private readonly UserGroupHandler _userGroupHandler;
-
-        public UserGroupController(IUserGroupRepository userGroupRepository,
-                                   UserGroupHandler userStateHandler)
+        public UserGroupController(IUserGroupRepository userGroupRepository)
 		{
             _userGroupRepository = userGroupRepository;
-            _userGroupHandler = userStateHandler;
 		}
 
         [Authorize]
@@ -34,7 +30,7 @@ namespace VKInternship.Controllers
 
             try
             {
-                await _userGroupHandler.AddUserGroupInDBAsync(userGroupDto, _userGroupRepository);
+                await new UserGroupHandler().AddUserGroupInDBAsync(userGroupDto, _userGroupRepository);
 
                 response = Ok();
             }
@@ -62,7 +58,7 @@ namespace VKInternship.Controllers
 
             try
             {
-                await _userGroupHandler.DeleteUserGroupByModelAsync(userGroupDto, _userGroupRepository);
+                await new UserGroupHandler().DeleteUserGroupByModelAsync(userGroupDto, _userGroupRepository);
 
                 response = Ok();
             }
@@ -79,14 +75,14 @@ namespace VKInternship.Controllers
         }
 
         [Authorize]
-        [HttpDelete("DeletingByCode")]
+        [HttpDelete("DeletingByCode{enumGroup}")]
         public async Task<IActionResult> DeleteUserGroupByCodeAsync(EnumGroup enumGroup)
         {
             IActionResult response;
 
             try
             {
-                await _userGroupHandler.DeleteUserGroupByCodeAsync(enumGroup, _userGroupRepository);
+                await new UserGroupHandler().DeleteUserGroupByCodeAsync(enumGroup, _userGroupRepository);
 
                 response = Ok();
             }
@@ -103,14 +99,14 @@ namespace VKInternship.Controllers
         }
 
         [Authorize]
-        [HttpDelete("DeletingById")]
+        [HttpDelete("DeletingById{userGroupId}")]
         public async Task<IActionResult> DeleteUserGroupByIdAsync(long userGroupId)
         {
             IActionResult response;
 
             try
             {
-                await _userGroupHandler.DeleteUserGroupByIdAsync(userGroupId, _userGroupRepository);
+                await new UserGroupHandler().DeleteUserGroupByIdAsync(userGroupId, _userGroupRepository);
 
                 response = Ok();
             }
@@ -134,7 +130,7 @@ namespace VKInternship.Controllers
 
             try
             {
-                await _userGroupHandler.ChangeUserGroupAsync(userGroupDto, _userGroupRepository);
+                await new UserGroupHandler().ChangeUserGroupAsync(userGroupDto, _userGroupRepository);
 
                 response = Ok();
             }
@@ -157,7 +153,7 @@ namespace VKInternship.Controllers
 
             try
             {
-                var all_user_group = await _userGroupHandler.GetAllUserGroupAsync(_userGroupRepository);
+                var all_user_group = await new UserGroupHandler().GetAllUserGroupAsync(_userGroupRepository);
 
                 response = Ok(all_user_group);
             }

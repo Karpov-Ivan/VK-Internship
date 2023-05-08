@@ -15,7 +15,9 @@ namespace DBCore
 
         public Task<List<UserGetModel>> GetAllUserAsync();
 
-        public Task<List<UserGetModel>> GetMultipleUserAsync(int count);
+        public Task<List<UserGetModel>> GetMultipleUserAsync(int skip, int count);
+
+        public Task<UserGetModel> GetUserByIdAsync(int userId);
     }
 }
 

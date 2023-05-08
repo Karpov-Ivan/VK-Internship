@@ -126,11 +126,11 @@ namespace DBCore
             }
         }
 
-        public async Task<List<UserGetModel>> GetMultipleUserAsync(int count)
+        public async Task<List<UserGetModel>> GetMultipleUserAsync(int skip,int count)
         {
             try
             {
-                var users = _context.Users.Take(count).ToList();
+                var users = _context.Users.Skip(skip).Take(count).ToList();
 
                 var userGetModel = new List<UserGetModel>();
                 foreach (var user in users)
@@ -141,6 +141,30 @@ namespace DBCore
 
                     userGetModel.Add(new UserConverter().GetUserGetModelFromUser(user, user_group, user_state));
                 }
+
+                return userGetModel;
+            }
+            catch (ArgumentNullException exception)
+            {
+                throw new ArgumentNullException(exception.Message);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        public async Task<UserGetModel> GetUserByIdAsync(int userId)
+        {
+            try
+            {
+                var user = _context.Users.ToList().First(x => x.Id == userId); ;
+
+                var user_group = _context.User_Group.First(x => x.Id == user.User_Group_Id);
+
+                var user_state = _context.User_State.First(x => x.Id == user.User_State_Id);
+
+                var userGetModel = new UserConverter().GetUserGetModelFromUser(user, user_group, user_state);
 
                 return userGetModel;
             }
