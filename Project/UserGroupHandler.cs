@@ -14,8 +14,8 @@ namespace Project
     {
 		public UserGroupHandler() { }
 
-		public async Task AddUserGroupInDB(UserGroupDto userGroupDto,
-                                     IUserGroupRepository postgresSQLUserGroupRepository)
+		public async Task AddUserGroupInDBAsync(UserGroupDto userGroupDto,
+                                                IUserGroupRepository postgresSQLUserGroupRepository)
 		{
             var userGroupModel = new UserConverter().GetUserGroupModelFromUserGroupDto(userGroupDto);
 
@@ -29,7 +29,7 @@ namespace Project
 
 				var userGroup = new UserConverter().GetUserGroupFromUserGroupModel(userGroupModel);
 
-                await postgresSQLUserGroupRepository.AddUserGroup(userGroup);
+                await postgresSQLUserGroupRepository.AddUserGroupAsync(userGroup);
 			}
             catch (DuplicateWaitObjectException exception)
             {
@@ -45,8 +45,8 @@ namespace Project
             }
         }
 
-        public async Task DeleteUserGroupByModel(UserGroupDto userGroupDto,
-                                                 IUserGroupRepository postgresSQLUserGroupRepository)
+        public async Task DeleteUserGroupByModelAsync(UserGroupDto userGroupDto,
+                                                      IUserGroupRepository postgresSQLUserGroupRepository)
         {
             var userGroupModel = new UserConverter().GetUserGroupModelFromUserGroupDto(userGroupDto);
 
@@ -60,7 +60,7 @@ namespace Project
 
                 var userGroup = new UserConverter().GetUserGroupFromUserGroupModel(userGroupModel);
 
-                await postgresSQLUserGroupRepository.DeleteUserGroupByModel(userGroup);
+                await postgresSQLUserGroupRepository.DeleteUserGroupByModelAsync(userGroup);
             }
             catch (ArgumentNullException exception)
             {
@@ -72,8 +72,8 @@ namespace Project
             }
         }
 
-        public async Task DeleteUserGroupByCode(EnumGroup enumGroup,
-                                                IUserGroupRepository postgresSQLUserGroupRepository)
+        public async Task DeleteUserGroupByCodeAsync(EnumGroup enumGroup,
+                                                     IUserGroupRepository postgresSQLUserGroupRepository)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Project
                     enumGroup != ProjectEnum.EnumGroup.User)
                     throw new ArgumentNullException();
 
-                await postgresSQLUserGroupRepository.DeleteUserGroupByCode(enumGroup);
+                await postgresSQLUserGroupRepository.DeleteUserGroupByCodeAsync(enumGroup);
             }
             catch (ArgumentNullException exception)
             {
@@ -93,15 +93,15 @@ namespace Project
             }
         }
 
-        public async Task DeleteUserGroupById(long userGroupId,
-                                              IUserGroupRepository postgresSQLUserGroupRepository)
+        public async Task DeleteUserGroupByIdAsync(long userGroupId,
+                                                   IUserGroupRepository postgresSQLUserGroupRepository)
         {
             try
             {
                 if (userGroupId < 0)
                     throw new ArgumentNullException();
 
-                await postgresSQLUserGroupRepository.DeleteUserGroupById(userGroupId);
+                await postgresSQLUserGroupRepository.DeleteUserGroupByIdAsync(userGroupId);
             }
             catch (ArgumentNullException exception)
             {
@@ -113,8 +113,8 @@ namespace Project
             }
         }
 
-        public async Task ChangeUserGroup(UserGroupDto userGroupDto,
-                                          IUserGroupRepository postgresSQLUserGroupRepository)
+        public async Task ChangeUserGroupAsync(UserGroupDto userGroupDto,
+                                               IUserGroupRepository postgresSQLUserGroupRepository)
         {
             var userGroupModel = new UserConverter().GetUserGroupModelFromUserGroupDto(userGroupDto);
 
@@ -128,7 +128,7 @@ namespace Project
 
                 var userGroup = new UserConverter().GetUserGroupFromUserGroupModel(userGroupModel);
 
-                await postgresSQLUserGroupRepository.ChangeUserGroup(userGroup);
+                await postgresSQLUserGroupRepository.ChangeUserGroupAsync(userGroup);
             }
             catch (ArgumentNullException exception)
             {
@@ -140,11 +140,11 @@ namespace Project
             }
         }
 
-        public async Task<List<UserGroupGetDto>> GetAllUserGroup(IUserGroupRepository postgresSQLUserGroupRepository)
+        public async Task<List<UserGroupGetDto>> GetAllUserGroupAsync(IUserGroupRepository postgresSQLUserGroupRepository)
         {
             try
             {
-                var allUserGroupModel = await postgresSQLUserGroupRepository.GetAllUserGroup();
+                var allUserGroupModel = await postgresSQLUserGroupRepository.GetAllUserGroupAsync();
 
                 return allUserGroupModel.Select(x => new UserConverter().GetUserGroupDtoFromUserGroup(x)).ToList();
             }

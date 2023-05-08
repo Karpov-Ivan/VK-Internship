@@ -10,7 +10,7 @@ namespace DBCore
     {
 		public PostgresSQLUserGroupRepository(Context context) : base(context) { }
 
-        public async Task AddUserGroup(User_Group userGroup)
+        public async Task AddUserGroupAsync(User_Group userGroup)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace DBCore
             }
         }
 
-        public async Task DeleteUserGroupByModel(User_Group userGroup)
+        public async Task DeleteUserGroupByModelAsync(User_Group userGroup)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace DBCore
             }
         }
 
-        public async Task DeleteUserGroupByCode(EnumGroup enumGroup)
+        public async Task DeleteUserGroupByCodeAsync(EnumGroup enumGroup)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace DBCore
             }
         }
 
-        public async Task DeleteUserGroupById(long userGroupId)
+        public async Task DeleteUserGroupByIdAsync(long userGroupId)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace DBCore
             }
         }
 
-        public async Task ChangeUserGroup(User_Group userGroup)
+        public async Task ChangeUserGroupAsync(User_Group userGroup)
         {
             try
             {
@@ -125,7 +125,7 @@ namespace DBCore
             }
         }
 
-        public async Task<List<User_Group>> GetAllUserGroup()
+        public async Task<List<User_Group>> GetAllUserGroupAsync()
         {
             try
             {

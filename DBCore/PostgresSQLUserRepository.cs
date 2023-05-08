@@ -13,7 +13,7 @@ namespace DBCore
 	{
         public PostgresSQLUserRepository(Context context) : base(context) { }
 
-        public async Task AddUser(User user)
+        public async Task AddUserAsync(User user)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace DBCore
             }
         }
 
-        public async Task DeleteUserByModel(User user)
+        public async Task DeleteUserByModelAsync(User user)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace DBCore
             }
         }
 
-        public async Task DeleteUserById(long userId)
+        public async Task DeleteUserByIdAsync(long userId)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace DBCore
             }
         }
 
-        public async Task<List<UserGetModel>> GetAllUser()
+        public async Task<List<UserGetModel>> GetAllUserAsync()
         {
             try
             {
@@ -126,7 +126,7 @@ namespace DBCore
             }
         }
 
-        public async Task<List<UserGetModel>> GetMultipleUser(int count)
+        public async Task<List<UserGetModel>> GetMultipleUserAsync(int count)
         {
             try
             {

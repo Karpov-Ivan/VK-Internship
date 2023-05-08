@@ -7,15 +7,15 @@ namespace DBCore
 {
 	public interface IUserRepository
 	{
-        public Task AddUser(User user);
+        public Task AddUserAsync(User user);
 
-        public Task DeleteUserByModel(User user);
+        public Task DeleteUserByModelAsync(User user);
 
-        public Task DeleteUserById(long userId);
+        public Task DeleteUserByIdAsync(long userId);
 
-        public Task<List<UserGetModel>> GetAllUser();
+        public Task<List<UserGetModel>> GetAllUserAsync();
 
-        public Task<List<UserGetModel>> GetMultipleUser(int count);
+        public Task<List<UserGetModel>> GetMultipleUserAsync(int count);
     }
 }
 

@@ -25,13 +25,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpPost("Adding")]
-        public async Task<IActionResult> AddUserState(UserStateDto userStateDto)
+        public async Task<IActionResult> AddUserStateAsync(UserStateDto userStateDto)
         {
             IActionResult response;
 
             try
             {
-                await _userStateHandler.AddUserStateInDB(userStateDto, _userStateRepository);
+                await _userStateHandler.AddUserStateInDBAsync(userStateDto, _userStateRepository);
 
                 response = Ok();
             }
@@ -53,13 +53,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpDelete("DeletingByModel")]
-        public async Task<IActionResult> DeleteUserStateByModel(UserStateDto userStateDto)
+        public async Task<IActionResult> DeleteUserStateByModelAsync(UserStateDto userStateDto)
         {
             IActionResult response;
 
             try
             {
-                await _userStateHandler.DeleteUserStateByModel(userStateDto, _userStateRepository);
+                await _userStateHandler.DeleteUserStateByModelAsync(userStateDto, _userStateRepository);
 
                 response = Ok();
             }
@@ -77,13 +77,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpDelete("DeletingByCode")]
-        public async Task<IActionResult> DeleteUserStateByCode(EnumState enumState)
+        public async Task<IActionResult> DeleteUserStateByCodeAsync(EnumState enumState)
         {
             IActionResult response;
 
             try
             {
-                await _userStateHandler.DeleteUserStateByCode(enumState, _userStateRepository);
+                await _userStateHandler.DeleteUserStateByCodeAsync(enumState, _userStateRepository);
 
                 response = Ok();
             }
@@ -101,13 +101,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpDelete("DeletingById")]
-        public async Task<IActionResult> DeleteUserStateById(long userStateId)
+        public async Task<IActionResult> DeleteUserStateByIdAsync(long userStateId)
         {
             IActionResult response;
 
             try
             {
-                await _userStateHandler.DeleteUserStateById(userStateId, _userStateRepository);
+                await _userStateHandler.DeleteUserStateByIdAsync(userStateId, _userStateRepository);
 
                 response = Ok();
             }
@@ -125,13 +125,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpPatch("Changing")]
-        public async Task<IActionResult> ChangeUserState(UserStateDto userStateDto)
+        public async Task<IActionResult> ChangeUserStateAsync(UserStateDto userStateDto)
         {
             IActionResult response;
 
             try
             {
-                await _userStateHandler.ChangeUserState(userStateDto, _userStateRepository);
+                await _userStateHandler.ChangeUserStateAsync(userStateDto, _userStateRepository);
 
                 response = Ok();
             }
@@ -148,13 +148,13 @@ namespace VKInternship.Controllers
         }
 
         [HttpGet("Getting")]
-        public async Task<IActionResult> GetAllUserState()
+        public async Task<IActionResult> GetAllUserStateAsync()
         {
             IActionResult response;
 
             try
             {
-                var all_user_state = await _userStateHandler.GetAllUserState(_userStateRepository);
+                var all_user_state = await _userStateHandler.GetAllUserStateAsync(_userStateRepository);
 
                 response = Ok(all_user_state);
             }

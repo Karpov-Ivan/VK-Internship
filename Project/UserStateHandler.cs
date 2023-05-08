@@ -10,8 +10,8 @@ namespace Project
 	{
 		public UserStateHandler() { }
 
-        public async Task AddUserStateInDB(UserStateDto userStateDto,
-                                     IUserStateRepository postgresSQLUserStateRepository)
+        public async Task AddUserStateInDBAsync(UserStateDto userStateDto,
+                                                IUserStateRepository postgresSQLUserStateRepository)
         {
             var userStateModel = new UserConverter().GetUserStateModelFromUserStateDto(userStateDto);
 
@@ -25,7 +25,7 @@ namespace Project
 
                 var userState = new UserConverter().GetUserStateFromUserStateModel(userStateModel);
 
-                await postgresSQLUserStateRepository.AddUserState(userState);
+                await postgresSQLUserStateRepository.AddUserStateAsync(userState);
             }
             catch (DuplicateWaitObjectException exception)
             {
@@ -41,8 +41,8 @@ namespace Project
             }
         }
 
-        public async Task DeleteUserStateByModel(UserStateDto userStateDto,
-                                                 IUserStateRepository postgresSQLUserStateRepository)
+        public async Task DeleteUserStateByModelAsync(UserStateDto userStateDto,
+                                                      IUserStateRepository postgresSQLUserStateRepository)
         {
             var userStateModel = new UserConverter().GetUserStateModelFromUserStateDto(userStateDto);
 
@@ -56,7 +56,7 @@ namespace Project
 
                 var userState = new UserConverter().GetUserStateFromUserStateModel(userStateModel);
 
-                await postgresSQLUserStateRepository.DeleteUserStateByModel(userState);
+                await postgresSQLUserStateRepository.DeleteUserStateByModelAsync(userState);
             }
             catch (ArgumentNullException exception)
             {
@@ -68,8 +68,8 @@ namespace Project
             }
         }
 
-        public async Task DeleteUserStateByCode(EnumState enumState,
-                                                IUserStateRepository postgresSQLUserStateRepository)
+        public async Task DeleteUserStateByCodeAsync(EnumState enumState,
+                                                     IUserStateRepository postgresSQLUserStateRepository)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace Project
                     enumState != ProjectEnum.EnumState.Blocked)
                     throw new ArgumentNullException();
 
-                await postgresSQLUserStateRepository.DeleteUserStateByCode(enumState);
+                await postgresSQLUserStateRepository.DeleteUserStateByCodeAsync(enumState);
             }
             catch (ArgumentNullException exception)
             {
@@ -89,15 +89,15 @@ namespace Project
             }
         }
 
-        public async Task DeleteUserStateById(long userStateId,
-                                              IUserStateRepository postgresSQLUserStateRepository)
+        public async Task DeleteUserStateByIdAsync(long userStateId,
+                                                   IUserStateRepository postgresSQLUserStateRepository)
         {
             try
             {
                 if (userStateId < 0)
                     throw new ArgumentNullException();
 
-                await postgresSQLUserStateRepository.DeleteUserStateById(userStateId);
+                await postgresSQLUserStateRepository.DeleteUserStateByIdAsync(userStateId);
             }
             catch (ArgumentNullException exception)
             {
@@ -109,8 +109,8 @@ namespace Project
             }
         }
 
-        public async Task ChangeUserState(UserStateDto userStateDto,
-                                          IUserStateRepository postgresSQLUserStateRepository)
+        public async Task ChangeUserStateAsync(UserStateDto userStateDto,
+                                               IUserStateRepository postgresSQLUserStateRepository)
         {
             var userStateModel = new UserConverter().GetUserStateModelFromUserStateDto(userStateDto);
 
@@ -124,7 +124,7 @@ namespace Project
 
                 var userState = new UserConverter().GetUserStateFromUserStateModel(userStateModel);
 
-                await postgresSQLUserStateRepository.ChangeUserState(userState);
+                await postgresSQLUserStateRepository.ChangeUserStateAsync(userState);
             }
             catch (ArgumentNullException exception)
             {
@@ -136,11 +136,11 @@ namespace Project
             }
         }
 
-        public async Task<List<UserStateGetDto>> GetAllUserState(IUserStateRepository postgresSQLUserStateRepository)
+        public async Task<List<UserStateGetDto>> GetAllUserStateAsync(IUserStateRepository postgresSQLUserStateRepository)
         {
             try
             {
-                var allUserStateModel = await postgresSQLUserStateRepository.GetAllUserState();
+                var allUserStateModel = await postgresSQLUserStateRepository.GetAllUserStateAsync();
 
                 return allUserStateModel.Select(x => new UserConverter().GetUserStateDtoFromUserState(x)).ToList();
             }

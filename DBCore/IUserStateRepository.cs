@@ -6,17 +6,17 @@ namespace DBCore
 {
 	public interface IUserStateRepository
 	{
-        public Task AddUserState(User_State userState);
+        public Task AddUserStateAsync(User_State userState);
 
-        public Task DeleteUserStateByModel(User_State userState);
+        public Task DeleteUserStateByModelAsync(User_State userState);
 
-        public Task DeleteUserStateByCode(EnumState enumState);
+        public Task DeleteUserStateByCodeAsync(EnumState enumState);
 
-        public Task DeleteUserStateById(long userStateId);
+        public Task DeleteUserStateByIdAsync(long userStateId);
 
-        public Task ChangeUserState(User_State userState);
+        public Task ChangeUserStateAsync(User_State userState);
 
-        public Task<List<User_State>> GetAllUserState();
+        public Task<List<User_State>> GetAllUserStateAsync();
     }
 }
 

@@ -26,13 +26,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpPost("Adding")]
-        public async Task<IActionResult> AddUser(UserDto userDto)
+        public async Task<IActionResult> AddUserAsync(UserDto userDto)
         {
             IActionResult response;
 
             try
             {
-                await _userHandler.AddUserInDB(userDto, _userRepository);
+                await _userHandler.AddUserInDBAsync(userDto, _userRepository);
 
                 response = Ok();
             }
@@ -54,13 +54,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpDelete("DeletingByModel")]
-        public async Task<IActionResult> DeleteUserByModel(UserDto userDto)
+        public async Task<IActionResult> DeleteUserByModelAsync(UserDto userDto)
         {
             IActionResult response;
 
             try
             {
-                await _userHandler.DeleteUserByModel(userDto, _userRepository);
+                await _userHandler.DeleteUserByModelAsync(userDto, _userRepository);
 
                 response = Ok();
             }
@@ -78,13 +78,13 @@ namespace VKInternship.Controllers
 
         [Authorize]
         [HttpDelete("DeletingById")]
-        public async Task<IActionResult> DeleteUserById(long userId)
+        public async Task<IActionResult> DeleteUserByIdAsync(long userId)
         {
             IActionResult response;
 
             try
             {
-                await _userHandler.DeleteUserById(userId, _userRepository);
+                await _userHandler.DeleteUserByIdAsync(userId, _userRepository);
 
                 response = Ok();
             }
@@ -101,13 +101,13 @@ namespace VKInternship.Controllers
         }
 
         [HttpGet("GettingAll")]
-        public async Task<IActionResult> GetAllUser()
+        public async Task<IActionResult> GetAllUserAsync()
         {
             IActionResult response;
 
             try
             {
-                var all_user = await _userHandler.GetAllUser(_userRepository);
+                var all_user = await _userHandler.GetAllUserAsync(_userRepository);
 
                 response = Ok(all_user);
             }
@@ -124,13 +124,13 @@ namespace VKInternship.Controllers
         }
 
         [HttpGet("GettingMultiple")]
-        public async Task<IActionResult> GetMultipleUser(int count)
+        public async Task<IActionResult> GetMultipleUserAsync(int count)
         {
             IActionResult response;
 
             try
             {
-                var all_user = await _userHandler.GetMultipleUser(count, _userRepository);
+                var all_user = await _userHandler.GetMultipleUserAsync(count, _userRepository);
 
                 response = Ok(all_user);
             }

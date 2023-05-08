@@ -9,7 +9,7 @@ namespace DBCore
     {
 		public PostgresSQLUserStateRepository(Context context) : base(context) { }
 
-        public async Task AddUserState(User_State userState)
+        public async Task AddUserStateAsync(User_State userState)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace DBCore
             }
         }
 
-        public async Task DeleteUserStateByModel(User_State userState)
+        public async Task DeleteUserStateByModelAsync(User_State userState)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace DBCore
             }
         }
 
-        public async Task DeleteUserStateByCode(EnumState enumState)
+        public async Task DeleteUserStateByCodeAsync(EnumState enumState)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace DBCore
             }
         }
 
-        public async Task DeleteUserStateById(long userStateId)
+        public async Task DeleteUserStateByIdAsync(long userStateId)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace DBCore
             }
         }
 
-        public async Task ChangeUserState(User_State userState)
+        public async Task ChangeUserStateAsync(User_State userState)
         {
             try
             {
@@ -124,7 +124,7 @@ namespace DBCore
             }
         }
 
-        public async Task<List<User_State>> GetAllUserState()
+        public async Task<List<User_State>> GetAllUserStateAsync()
         {
             try
             {

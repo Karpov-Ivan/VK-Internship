@@ -11,7 +11,7 @@ namespace Project
 	{
 		public UserHandler() { }
 
-        public async Task AddUserInDB(UserDto userDto, IUserRepository postgresSQLUserRepository)
+        public async Task AddUserInDBAsync(UserDto userDto, IUserRepository postgresSQLUserRepository)
         {
             var userModel = new UserConverter().GetUserModelFromUserDto(userDto);
 
@@ -25,7 +25,7 @@ namespace Project
 
                 var user = new UserConverter().GetUserFromUserModel(userModel);
 
-                await postgresSQLUserRepository.AddUser(user);
+                await postgresSQLUserRepository.AddUserAsync(user);
             }
             catch (DuplicateWaitObjectException exception)
             {
@@ -41,7 +41,7 @@ namespace Project
             }
         }
 
-        public async Task DeleteUserByModel(UserDto userDto, IUserRepository postgresSQLUserRepository)
+        public async Task DeleteUserByModelAsync(UserDto userDto, IUserRepository postgresSQLUserRepository)
         {
             var userModel = new UserConverter().GetUserModelFromUserDto(userDto);
 
@@ -55,7 +55,7 @@ namespace Project
 
                 var user = new UserConverter().GetUserFromUserModel(userModel);
 
-                await postgresSQLUserRepository.DeleteUserByModel(user);
+                await postgresSQLUserRepository.DeleteUserByModelAsync(user);
             }
             catch (ArgumentNullException exception)
             {
@@ -67,14 +67,14 @@ namespace Project
             }
         }
 
-        public async Task DeleteUserById(long userId, IUserRepository postgresSQLUserRepository)
+        public async Task DeleteUserByIdAsync(long userId, IUserRepository postgresSQLUserRepository)
         {
             try
             {
                 if (userId < 0)
                     throw new ArgumentNullException();
 
-                await postgresSQLUserRepository.DeleteUserById(userId);
+                await postgresSQLUserRepository.DeleteUserByIdAsync(userId);
             }
             catch (ArgumentNullException exception)
             {
@@ -86,11 +86,11 @@ namespace Project
             }
         }
 
-        public async Task<List<UserGetDto>> GetAllUser(IUserRepository postgresSQLUserRepository)
+        public async Task<List<UserGetDto>> GetAllUserAsync(IUserRepository postgresSQLUserRepository)
         {
             try
             {
-                var allUserGetModel = await postgresSQLUserRepository.GetAllUser();
+                var allUserGetModel = await postgresSQLUserRepository.GetAllUserAsync();
 
                 return allUserGetModel.Select(x => new UserConverter().GetUserGetDtoFromUserGetModel(x)).ToList();
             }
@@ -104,11 +104,11 @@ namespace Project
             }
         }
 
-        public async Task<List<UserGetDto>> GetMultipleUser(int count, IUserRepository postgresSQLUserRepository)
+        public async Task<List<UserGetDto>> GetMultipleUserAsync(int count, IUserRepository postgresSQLUserRepository)
         {
             try
             {
-                var allUserGetModel = await postgresSQLUserRepository.GetMultipleUser(count);
+                var allUserGetModel = await postgresSQLUserRepository.GetMultipleUserAsync(count);
 
                 return allUserGetModel.Select(x => new UserConverter().GetUserGetDtoFromUserGetModel(x)).ToList();
             }
