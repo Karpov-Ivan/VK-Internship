@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using DBModels;
 using System.Text.RegularExpressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DBCore
 {

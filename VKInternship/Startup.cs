@@ -27,7 +27,7 @@ namespace VKInternship
         {
             var connectionString = Configuration.GetConnectionString("VKInternshipDB");
             services.AddDbContext<Context>(options =>
-                options.UseNpgsql(connectionString)
+                options.UseNpgsql(connectionString, x => x.MigrationsAssembly("DBCore"))
             );
             services.AddMvc();
 
@@ -107,7 +107,11 @@ namespace VKInternship
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseHttpsRedirection();
+
+            if (!env.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseEndpoints(endpoints =>
             {
